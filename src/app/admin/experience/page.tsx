@@ -227,23 +227,28 @@ export default function AdminExperiencePage() {
 
   const handleSave = async () => {
     setSaving(true);
-    
-    const { error } = await supabase.from('app_config').upsert({
-      id: 'home',
-      data: {
-        banner_title: bannerTitle,
-        banner_subtitle: bannerSubtitle,
-        banner_button_text: bannerButton,
-        banner_image_url: bannerImage,
-        sections: sections,
-      }
-    });
+    try {
+      const { error } = await supabase.from('app_config').upsert({
+        id: 'home',
+        data: {
+          banner_title: bannerTitle,
+          banner_subtitle: bannerSubtitle,
+          banner_button_text: bannerButton,
+          banner_image_url: bannerImage,
+          sections: sections,
+        }
+      }, { onConflict: 'id' });
 
-    setSaving(false);
-    if (!error) {
-      alert('Configurações salvas com sucesso!');
-    } else {
-      alert('Erro ao salvar.');
+      if (error) {
+        console.error('Erro detalhado:', error);
+        alert(`Erro ao salvar no Supabase: ${error.message} (${error.code})`);
+      } else {
+        alert('Configurações publicadas com sucesso na Home!');
+      }
+    } catch (err: any) {
+      alert(`Erro fatal: ${err.message}`);
+    } finally {
+      setSaving(false);
     }
   };
 
