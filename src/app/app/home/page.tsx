@@ -11,11 +11,10 @@ export default async function StudentHomePage() {
     .eq('id', 'home')
     .single();
 
-  // Busca módulos publicados
+  // Busca todos os módulos (teste de visibilidade)
   const { data: modules } = await supabase
     .from('modules')
     .select('*')
-    .eq('status', 'published')
     .order('order_index', { ascending: true });
 
   return (
