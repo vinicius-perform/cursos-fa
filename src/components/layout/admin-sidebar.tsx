@@ -37,15 +37,18 @@ export function AdminSidebar() {
     <div className="flex flex-col w-72 h-screen border-r border-white/5 bg-background relative z-50">
       <div className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-primary/30 to-transparent" />
       
-      <div className="h-32 flex items-center px-8">
-        <div className="flex items-center gap-4">
-           <div className="h-12 w-12 bg-primary rounded-full flex items-center justify-center shadow-[0_0_25px_oklch(0.86_0.22_142_/_0.4)]">
-              <div className="h-4 w-4 bg-background rounded-full" />
-           </div>
-           <div className="flex flex-col">
-              <span className="text-xl font-black text-white tracking-tighter leading-none">FA ADMIN</span>
-              <span className="text-[10px] uppercase tracking-[0.4em] text-primary font-black mt-1">Foundation</span>
-           </div>
+      <div className="h-32 flex items-center px-10">
+        <div className="relative group">
+          {/* Destaque de Luz (Glow) */}
+          <div className="absolute inset-0 bg-primary/20 blur-[30px] rounded-full animate-pulse" />
+          
+          <Link href="/admin/dashboard" className="relative z-10 block">
+            <img 
+              src="/logo.png" 
+              alt="Logo" 
+              className="h-16 w-auto object-contain drop-shadow-[0_0_15px_rgba(var(--primary-rgb),0.2)]"
+            />
+          </Link>
         </div>
       </div>
       
