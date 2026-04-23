@@ -55,10 +55,10 @@ function ModuleRow({ title, modules }: { title: string, modules: any[] }) {
 }
 export default function StudentHomeClient({ config, modulesToUse }: { config: any, modulesToUse: any[] }) {
   const banner = {
-    title: config?.banner_title || 'Plataforma de Cursos',
-    subtitle: config?.banner_subtitle || 'Aprenda as técnicas que estão definindo o mercado.',
-    buttonText: config?.banner_button_text || 'INICIAR JORNADA',
-    imageUrl: config?.banner_image_url || 'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1920&q=80',
+    title: config?.banner_title !== undefined ? config.banner_title : 'CURSOS FA',
+    subtitle: config?.banner_subtitle !== undefined ? config.banner_subtitle : '',
+    buttonText: config?.banner_button_text || 'Assistir Agora',
+    imageUrl: config?.banner_image_url || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1920&q=80',
   };
 
   const sections = config?.sections || [];
@@ -72,65 +72,56 @@ export default function StudentHomeClient({ config, modulesToUse }: { config: an
       </div>
 
       {/* Cinematic Hero */}
-      <div className="relative w-full h-[90vh] flex items-center justify-center overflow-hidden">
+      <div className="relative w-full h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <motion.img 
-            initial={{ scale: 1.1, opacity: 0 }}
+            initial={{ scale: 1.05, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 2.5, ease: "easeOut" }}
             src={banner.imageUrl}
             alt="Banner"
             className="w-full h-full object-cover"
           />
-          {/* Overlays removidos para total nitidez */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
         </div>
         
         <div className="relative z-10 px-8 md:px-16 w-full max-w-7xl flex flex-col items-center text-center">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.2 }}
-            className="space-y-10"
+            className="space-y-8"
           >
-            <div className="flex flex-col items-center gap-4">
-              {/* Badge e linha removidos */}
-            </div>
+            {banner.title && (
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-[1.1] tracking-tighter uppercase drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                {banner.title.split(' ').map((word: string, i: number) => (
+                  <span key={i} className={i % 2 === 0 ? "block" : "block text-transparent bg-clip-text bg-gradient-to-b from-primary to-primary/80"}>
+                    {word}
+                  </span>
+                ))}
+              </h1>
+            )}
             
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-heading font-bold text-white leading-[1] tracking-tighter uppercase drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-              {banner.title.split(' ').map((word: string, i: number) => (
-                <span key={i} className={i % 2 === 0 ? "block" : "block text-transparent bg-clip-text bg-gradient-to-b from-primary to-primary/80 opacity-90"}>
-                  {word}
-                </span>
-              ))}
-            </h1>
-            
-            <p className="text-lg md:text-xl text-zinc-400 drop-shadow-md font-medium leading-relaxed max-w-2xl mx-auto italic opacity-80 backdrop-blur-[1px]">
-               {banner.subtitle}
-            </p>
+            {banner.subtitle && (
+              <p className="text-base md:text-lg text-zinc-400 drop-shadow-md font-medium leading-relaxed max-w-2xl mx-auto italic opacity-80 backdrop-blur-[1px]">
+                 {banner.subtitle}
+              </p>
+            )}
           </motion.div>
         </div>
 
-        {/* Floating Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 opacity-40">
-           <div className="w-[1px] h-20 bg-gradient-to-b from-primary to-transparent animate-pulse" />
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 opacity-30">
+           <div className="w-[1px] h-16 bg-gradient-to-b from-primary to-transparent animate-pulse" />
         </div>
       </div>
 
       {/* Content Sections */}
-      <div className="relative z-20 pb-40 space-y-10 -mt-24">
+      <div className="relative z-20 pb-40 space-y-10 -mt-20">
         {sections.map((section: any) => {
            if (!section.active) return null;
            
-           let sModules = modulesToUse || [];
-           
            // Filtra módulos pela categoria da seção
-           if (section.categoryId) {
-             sModules = sModules.filter((m: any) => m.category_id === section.categoryId);
-           } else {
-             // Se não for uma seção de categoria (antigo), pula
-             return null;
-           }
+           const sModules = modulesToUse.filter((m: any) => m.category_id === section.categoryId);
 
            if (sModules.length === 0) return null;
 
