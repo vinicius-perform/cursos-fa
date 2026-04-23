@@ -100,6 +100,7 @@ export default function ModulesPage() {
           category_id: formData.category_id || null,
           cover_image_vertical: formData.cover_image_vertical.trim(),
           banner_image_horizontal: formData.banner_image_horizontal.trim(),
+          status: 'published',
           order: modules.length 
         }]);
 
