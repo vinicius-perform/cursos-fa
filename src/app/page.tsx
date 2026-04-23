@@ -163,10 +163,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background">
+    <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-[#050505]">
       {/* Cinematic Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-primary/5" />
         <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-primary/10 blur-[160px] rounded-full animate-pulse" />
         <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full" />
       </div>
@@ -177,22 +177,25 @@ export default function LoginPage() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 w-full max-w-[440px] px-6"
       >
-        <div className="text-center mb-12">
+        <div className="text-center mb-16">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="flex flex-col items-center gap-6"
+            className="flex flex-col items-center"
           >
-             <div className="relative group">
-               <div className="absolute -inset-10 bg-primary/30 blur-3xl rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
-               <div className="relative w-20 h-20 bg-primary rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(var(--primary-rgb),0.5)]">
-                  <div className="h-6 w-6 bg-background rounded-full" />
+             <div className="relative">
+               {/* Destaque de Luz (Glow) */}
+               <div className="absolute inset-0 bg-primary/40 blur-[60px] rounded-full animate-pulse" />
+               <div className="absolute -inset-10 bg-primary/10 blur-[100px] rounded-full" />
+               
+               <div className="relative z-10">
+                  <img 
+                    src="/logo.png" 
+                    alt="Logo" 
+                    className="w-48 h-48 object-contain drop-shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)]"
+                  />
                </div>
-             </div>
-             <div className="flex flex-col items-center">
-                <h2 className="text-4xl font-black text-white tracking-tighter uppercase leading-none">FA ADMIN</h2>
-                <span className="text-[10px] uppercase tracking-[0.4em] text-primary font-black mt-2">Platform Access</span>
              </div>
           </motion.div>
         </div>
