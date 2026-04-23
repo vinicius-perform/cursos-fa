@@ -54,6 +54,11 @@ function ModuleRow({ title, modules }: { title: string, modules: any[] }) {
   );
 }
 export default function StudentHomeClient({ config, modulesToUse }: { config: any, modulesToUse: any[] }) {
+  console.log('--- DEBUG HOME ALUNO ---');
+  console.log('Configuração Recebida:', config);
+  console.log('Módulos Disponíveis:', modulesToUse);
+  console.log('Seções Configuradas:', config?.sections);
+  
   const banner = {
     title: config?.banner_title !== undefined ? config.banner_title : 'CURSOS FA',
     subtitle: config?.banner_subtitle !== undefined ? config.banner_subtitle : '',
