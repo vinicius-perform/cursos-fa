@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   description: "Plataforma de cursos exclusiva",
 };
 
+import { Toaster } from "sonner";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,7 +29,10 @@ export default function RootLayout({
       lang="pt-br"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Toaster position="top-right" theme="dark" closeButton richColors />
+      </body>
     </html>
   );
 }
