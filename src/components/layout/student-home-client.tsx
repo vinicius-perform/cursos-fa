@@ -136,7 +136,7 @@ export default function StudentHomeClient({ config, modulesToUse }: { config: an
 
            return <ModuleRow key={section.id} title={section.label} modules={sModules} />;
         })}
-      </div>    </div>
+      </div>
 
       <style dangerouslySetInnerHTML={{__html: `
         .style-scrollbar-hide::-webkit-scrollbar {
