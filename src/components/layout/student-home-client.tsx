@@ -27,7 +27,7 @@ function ModuleRow({ title, modules }: { title: string, modules: any[] }) {
             className="snap-start shrink-0 transition-all duration-500 group-hover/row:opacity-40 group-hover/row:blur-[4px] hover:!opacity-100 hover:!blur-none hover:scale-110 z-10 hover:z-20"
           >
             <Link href={`/app/module/${module.id}/lesson/first`} className="focus:outline-none block group">
-              <Card className="w-[220px] h-[330px] overflow-hidden relative border-white/5 bg-zinc-900 hover:border-primary/40 transition-all duration-500 shadow-2xl rounded-xl">
+              <Card className="w-[250px] h-[375px] overflow-hidden relative border-white/5 bg-zinc-900 hover:border-primary/40 transition-all duration-500 shadow-2xl rounded-xl">
                 <img 
                   src={module.cover_image_vertical || 'https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&w=400&q=80'} 
                   alt={module.title}
@@ -54,11 +54,6 @@ function ModuleRow({ title, modules }: { title: string, modules: any[] }) {
   );
 }
 export default function StudentHomeClient({ config, modulesToUse }: { config: any, modulesToUse: any[] }) {
-  console.log('--- DEBUG HOME ALUNO ---');
-  console.log('Configuração Recebida:', config);
-  console.log('Módulos Disponíveis:', modulesToUse);
-  console.log('Seções Configuradas:', config?.sections);
-  
   const banner = {
     title: config?.banner_title !== undefined ? config.banner_title : 'CURSOS FA',
     subtitle: config?.banner_subtitle !== undefined ? config.banner_subtitle : '',
@@ -77,7 +72,7 @@ export default function StudentHomeClient({ config, modulesToUse }: { config: an
       </div>
 
       {/* Cinematic Hero */}
-      <div className="relative w-full h-[85vh] flex items-center justify-center overflow-hidden">
+      <div className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <motion.img 
             initial={{ scale: 1.05, opacity: 0 }}
@@ -87,15 +82,15 @@ export default function StudentHomeClient({ config, modulesToUse }: { config: an
             alt="Banner"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90" />
         </div>
         
-        <div className="relative z-10 px-8 md:px-16 w-full max-w-7xl flex flex-col items-center text-center">
+        <div className="relative z-10 px-6 md:px-12 w-full max-w-7xl flex flex-col items-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.2 }}
-            className="space-y-8"
+            className="space-y-6"
           >
             {banner.title && (
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-[1.1] tracking-tighter uppercase drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">
@@ -108,7 +103,7 @@ export default function StudentHomeClient({ config, modulesToUse }: { config: an
             )}
             
             {banner.subtitle && (
-              <p className="text-base md:text-lg text-zinc-400 drop-shadow-md font-medium leading-relaxed max-w-2xl mx-auto italic opacity-80 backdrop-blur-[1px]">
+              <p className="text-sm md:text-lg text-zinc-400 drop-shadow-md font-medium leading-relaxed max-w-2xl mx-auto italic opacity-80 backdrop-blur-[1px]">
                  {banner.subtitle}
               </p>
             )}
@@ -121,7 +116,7 @@ export default function StudentHomeClient({ config, modulesToUse }: { config: an
       </div>
 
       {/* Content Sections */}
-      <div className="relative z-20 pb-40 space-y-10 -mt-20">
+      <div className="relative z-20 pb-40 space-y-10 -mt-16 max-w-[1440px] mx-auto">
         {sections.map((section: any) => {
            if (!section.active) return null;
            
