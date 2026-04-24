@@ -1,6 +1,8 @@
 import StudentHomeClient from '@/components/layout/student-home-client';
 import { createClient } from '@/lib/supabase-server';
 
+export const dynamic = 'force-dynamic';
+
 export default async function StudentHomePage() {
   const supabase = createClient();
 
