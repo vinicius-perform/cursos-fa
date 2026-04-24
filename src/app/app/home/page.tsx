@@ -20,11 +20,12 @@ export default async function StudentHomePage() {
     .eq('id', 'home')
     .single();
 
-  // Busca todos os módulos (teste de visibilidade total)
+  // Busca módulos publicados (com a coluna de ordem correta)
   const { data: modules, error: modulesError } = await supabase
     .from('modules')
     .select('*', { count: 'exact' })
-    .order('order_index', { ascending: true });
+    .eq('status', 'published')
+    .order('order', { ascending: true });
 
   if (modulesError) {
     console.error('ERRO AO BUSCAR MÓDULOS:', modulesError);
