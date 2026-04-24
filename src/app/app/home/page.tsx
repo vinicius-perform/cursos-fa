@@ -8,6 +8,10 @@ export default async function StudentHomePage() {
   const now = new Date().toISOString();
 
   console.log(`[${now}] INICIANDO BUSCA DE DADOS NA HOME`);
+  
+  // Teste simples de contagem
+  const { count: totalModules } = await supabase.from('modules').select('*', { count: 'exact', head: true });
+  console.log('CONTAGEM DIRETA DE MÓDULOS:', totalModules);
 
   // Busca configuração da Home
   const { data: configRow } = await supabase
