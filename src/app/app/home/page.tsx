@@ -5,8 +5,11 @@ export const dynamic = 'force-dynamic';
 
 export default async function StudentHomePage() {
   const supabase = createClient();
+  const now = new Date().toISOString();
 
-  // Busca configurações dinâmicas da home
+  console.log(`[${now}] INICIANDO BUSCA DE DADOS NA HOME`);
+
+  // Busca configuração da Home
   const { data: configRow } = await supabase
     .from('app_config')
     .select('data')
@@ -16,7 +19,7 @@ export default async function StudentHomePage() {
   // Busca todos os módulos (teste de visibilidade total)
   const { data: modules, error: modulesError } = await supabase
     .from('modules')
-    .select('*')
+    .select('*', { count: 'exact' })
     .order('order_index', { ascending: true });
 
   if (modulesError) {
